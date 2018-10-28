@@ -405,6 +405,9 @@ function saveStyle(style) {
 
   function write(style, store) {
     style.sections = normalizeStyleSections(style);
+    if (/update\.(update\.userstyles)/i.test(style.md5Url)) {
+      style.md5Url = style.md5Url.replace(RegExp.lastMatch, RegExp.$1);
+    }
     if (store) {
       return new Promise(resolve => {
         store.put(style).onsuccess = event => resolve(done(event));
