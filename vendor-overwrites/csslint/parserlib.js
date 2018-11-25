@@ -4803,7 +4803,7 @@ self.parserlib = (() => {
       return result;
     }
 
-    _expr(inFunction) {
+    _expr(inFunction, endToken = Tokens.RPAREN) {
       const stream = this._tokenStream;
       const values = [];
 
@@ -4812,7 +4812,7 @@ self.parserlib = (() => {
         if (!value && !values.length) return null;
 
         // get everything inside the parens and let validateProperty handle that
-        if (!value && inFunction && stream.peek() !== Tokens.RPAREN) {
+        if (!value && inFunction && stream.peek() !== endToken) {
           stream.get();
           value = new PropertyValuePart(stream._token);
         } else if (!value) {
@@ -4940,8 +4940,9 @@ self.parserlib = (() => {
         inFunction && Tokens.LBRACE,
       ])) {
         const token = stream._token;
-        token.expr = this._expr(inFunction);
-        stream.mustMatch(Tokens.type(token.endChar));
+        const endToken = Tokens.type(token.endChar);
+        token.expr = this._expr(inFunction, endToken);
+        stream.mustMatch(endToken);
         return finalize(token, token.value + (token.expr || '') + token.endChar);
       }
 
