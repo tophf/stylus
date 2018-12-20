@@ -3249,7 +3249,7 @@ self.parserlib = (() => {
     notOrIsToken(first, pos) {
       // first is always ':'
       const reader = this._reader;
-      const func = reader.readMatch(/(not|is|(-(moz|webkit)-)?any|matches)\(/iy);
+      const func = reader.readMatch(/(not|is|(-(moz|webkit)-)?(any|matches))\(/iy);
       if (func) {
         const lcase = func[0].toLowerCase();
         const type =
