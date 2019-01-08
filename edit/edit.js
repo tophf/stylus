@@ -363,7 +363,8 @@ function save() {
     name: $('#name').value.trim(),
     enabled: $('#enabled').checked,
     reason: 'editSave',
-    sections: getSectionsHashes()
+    sections: getSectionsHashes(),
+    updateDate: Date.now(),
   })
   .then(style => {
     styleId = style.id;

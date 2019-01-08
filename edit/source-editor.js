@@ -208,6 +208,7 @@ function createSourceEditor(style) {
         reason: 'editSave',
         enabled: style.enabled,
         sourceCode: code,
+        updateDate: Date.now(),
       }))
       .then(({style, errors}) => {
         replaceStyle(style);
