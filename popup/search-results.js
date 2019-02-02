@@ -194,7 +194,7 @@ window.addEventListener('showStyles:done', function _() {
   /** Decrements currentPage and loads results. */
   function prev() {
     if (loading) {
-      debounce(next, 100);
+      debounce(prev, 100);
       return;
     }
     displayedPage = Math.max(1, displayedPage - 1);
